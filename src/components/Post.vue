@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -7,19 +7,8 @@ import { Post } from "../types/post";
 
 const route = useRoute();
 const store = useStore();
-const post = ref<Post | null>(null);
+const post = computed<Post>(() => store.getters.getPostById(+route.params.id));
 const comment = ref("");
-
-onMounted(() => {
-  post.value = store.getters.getPostById(+route.params.id);
-});
-
-watch(
-  () => route.params.id,
-  (newId) => {
-    post.value = store.getters.getPostById(+newId);
-  }
-);
 
 const handleSubmit = (e: Event) => {
   e.preventDefault();
