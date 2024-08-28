@@ -1,5 +1,12 @@
-<script setup></script>
+<script setup>
+import { useStore } from "vuex";
+
+const store = useStore();
+store.dispatch("fetchPosts");
+</script>
 
 <template>
-  <h1>hello world</h1>
+  <main>
+    <RouterView />
+  </main>
 </template>
