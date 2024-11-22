@@ -20,6 +20,17 @@ const handleSubmit = (e: Event) => {
     comment.value = "";
   }
 };
+
+const convertToHalfWidth = (input: string): string => {
+  return input.replace(/[０-９]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0xfee0)
+  );
+};
+
+const handleInput = (e: Event) => {
+  const target = e.target as HTMLTextAreaElement;
+  comment.value = convertToHalfWidth(target.value);
+};
 </script>
 
 <template>
@@ -46,6 +57,9 @@ const handleSubmit = (e: Event) => {
     <div>
       <button>submit</button>
     </div>
+  </form>
+  <form>
+    <input type="search" inputmode="numeric" @input="handleInput" />
   </form>
 </template>
 
