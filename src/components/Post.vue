@@ -27,6 +27,10 @@ const convertToHalfWidth = (input: string): string => {
   );
 };
 
+const submit = () => {
+  comment.value = "";
+};
+
 const handleInput = (e: Event) => {
   const target = e.target as HTMLTextAreaElement;
   comment.value = convertToHalfWidth(target.value);
@@ -59,7 +63,12 @@ const handleInput = (e: Event) => {
     </div>
   </form>
   <form>
-    <input type="search" inputmode="numeric" @input="handleInput" />
+    <input
+      type="search"
+      inputmode="numeric"
+      @input="handleInput"
+      @keydown.enter="submit"
+    />
   </form>
 </template>
 
